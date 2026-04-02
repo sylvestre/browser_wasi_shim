@@ -71,7 +71,7 @@ export default class WASI {
         buffer.setUint32(argc, self.args.length, true);
         let buf_size = 0;
         for (const arg of self.args) {
-          buf_size += arg.length + 1;
+          buf_size += new TextEncoder().encode(arg).length + 1;
         }
         buffer.setUint32(argv_buf_size, buf_size, true);
         debug.log(
